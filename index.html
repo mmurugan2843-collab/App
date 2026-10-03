@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClientFlow - Never Lose a Customer to a Forgotten Follow-Up</title>
+  <meta name="description" content="Simple customer management, follow-up reminders, and appointment tracking for small businesses, freelancers, and local service providers.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body>
+
+  <!-- Landing Navigation -->
+  <nav class="landing-nav">
+    <a href="index.html" class="nav-brand">
+      <div class="brand-icon">CF</div>
+      <span>ClientFlow</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#calculator">Revenue Calculator</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-outline btn-sm">Log In</a>
+      <a href="signup.html" class="btn btn-primary btn-sm">Start Free</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-badge">
+      <span>✨</span> Built for local businesses, freelancers, salons &amp; contractors
+    </div>
+    <h1 class="hero-title">
+      Never lose a customer because you <span>forgot to follow up</span>.
+    </h1>
+    <p class="hero-subtitle">
+      67% of enquiries never turn into paying customers simply because busy business owners forget to follow up. ClientFlow keeps all your leads, reminders, and appointments in one clutter-free dashboard.
+    </p>
+    <div class="hero-ctas">
+      <a href="signup.html" class="btn btn-primary btn-lg">Start Free — No Credit Card</a>
+      <a href="login.html?demo=true" class="btn btn-secondary btn-lg">⚡ Try 1-Click Interactive Demo</a>
+    </div>
+
+    <!-- Interactive Lost Revenue Calculator -->
+    <div class="calc-card" id="calculator">
+      <div class="calc-header">
+        <h3>💰 Calculate Revenue Lost to Missed Follow-ups</h3>
+        <p>See how much uncollected money is slipping through the cracks each month.</p>
+      </div>
+      <div class="calc-grid">
+        <div>
+          <div class="calc-slider-group">
+            <label>
+              <span>Monthly Inquiries:</span>
+              <strong id="calcInquiriesVal">25 leads</strong>
+            </label>
+            <input type="range" id="calcInquiries" class="calc-slider" min="5" max="150" value="25">
+          </div>
+          <div class="calc-slider-group">
+            <label>
+              <span>Average Customer Value ($):</span>
+              <strong id="calcPriceVal">$250</strong>
+            </label>
+            <input type="range" id="calcPrice" class="calc-slider" min="50" max="2500" step="25" value="250">
+          </div>
+          <div class="calc-slider-group">
+            <label>
+              <span>Estimated Unfollowed Leads:</span>
+              <strong id="calcDropVal">30%</strong>
+            </label>
+            <input type="range" id="calcDrop" class="calc-slider" min="10" max="70" step="5" value="30">
+          </div>
+        </div>
+        <div class="calc-result">
+          <div style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Estimated Monthly Lost Revenue</div>
+          <div class="calc-result-number" id="calcLostTotal">$1,875</div>
+          <p style="font-size: 12px; color: var(--text-muted);">
+            Recovering just 2 of these missed opportunities pays for ClientFlow for an entire year!
+          </p>
+          <a href="signup.html" class="btn btn-primary btn-sm" style="margin-top: 14px;">Stop Losing Revenue Today</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="features-section" id="features">
+    <div class="section-header">
+      <div class="section-tag">Powerful Simplicity</div>
+      <h2 class="section-title">Everything you need to close more jobs</h2>
+      <p class="section-subtitle">No bloated enterprise complexity. Just the core tools local service pros need to stay organized every single day.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">📥</div>
+        <h4>Centralized Lead Inbox</h4>
+        <p>Collect prospects from phone calls, Instagram, Google, and word-of-mouth. Categorize by status and keep private conversation notes.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">⏰</div>
+        <h4>Follow-up Reminders</h4>
+        <p>Categorized into Today, Upcoming, and Overdue queues. Never wake up wondering who you were supposed to call back today.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">📅</div>
+        <h4>Appointment Tracking</h4>
+        <p>Log consultations, service calls, and bookings with customer links, service tags, and dates. Clean timeline view.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">⚡</div>
+        <h4>AI Message Generator</h4>
+        <p>Stuck on what to say? Generate personalized, professional follow-up templates in seconds with 1-click WhatsApp or Email sending.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">📊</div>
+        <h4>Visual Business Analytics</h4>
+        <p>Know your numbers: monitor inquiry sources, lead conversion rates, and follow-up completion velocity with crisp visual charts.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">📂</div>
+        <h4>Instant CSV Export</h4>
+        <p>You own 100% of your data. Download your complete customer directory with full contact history in one click whenever you need it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="features-section" id="how-it-works" style="background-color: var(--bg-secondary); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <div class="section-header">
+      <div class="section-tag">Workflow</div>
+      <h2 class="section-title">How ClientFlow Works</h2>
+      <p class="section-subtitle">Three easy steps that take under 2 minutes a day.</p>
+    </div>
+
+    <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+      <div class="feature-card">
+        <div style="font-size: 28px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">01</div>
+        <h4>Log the Inquiry</h4>
+        <p>When a potential client texts, calls, or walks in, add their name and what they need in 15 seconds from your phone or laptop.</p>
+      </div>
+      <div class="feature-card">
+        <div style="font-size: 28px; font-weight: 800; color: var(--accent); margin-bottom: 10px;">02</div>
+        <h4>Set a Follow-Up Date</h4>
+        <p>Choose when to check in—e.g. "Tomorrow at 2 PM" or "3 days after quote sent". ClientFlow puts it right into your Today's Queue.</p>
+      </div>
+      <div class="feature-card">
+        <div style="font-size: 28px; font-weight: 800; color: var(--success); margin-bottom: 10px;">03</div>
+        <h4>Close the Booking</h4>
+        <p>Check off the reminder, send a warm follow-up message with our AI writer, and transition the lead directly into a paying customer.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Section -->
+  <section class="comparison-section">
+    <div class="section-header">
+      <div class="section-tag">Comparison</div>
+      <h2 class="section-title">Why switch from messy notebooks and sticky notes?</h2>
+    </div>
+
+    <div class="comparison-table-wrapper">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Workflow Element</th>
+            <th>Sticky Notes / Memory</th>
+            <th>With ClientFlow</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Lead Tracking</strong></td>
+            <td>Scattered on napkins, WhatsApp, and scraps</td>
+            <td>Clean, searchable customer directory</td>
+          </tr>
+          <tr>
+            <td><strong>Follow-up Timing</strong></td>
+            <td>Forgotten once busy work starts</td>
+            <td>Overdue &amp; Today automated reminders</td>
+          </tr>
+          <tr>
+            <td><strong>Appointment History</strong></td>
+            <td>Disorganized paper calendars</td>
+            <td>Integrated client timeline &amp; service log</td>
+          </tr>
+          <tr>
+            <td><strong>Writing Messages</strong></td>
+            <td>Wasting 10 mins overthinking wording</td>
+            <td>Instant professional AI templates</td>
+          </tr>
+          <tr>
+            <td><strong>Data Ownership</strong></td>
+            <td>Lost when changing phone or notebooks</td>
+            <td>Secure cloud sync &amp; instant CSV backup</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing-section" id="pricing">
+    <div class="section-header">
+      <div class="section-tag">Transparent Pricing</div>
+      <h2 class="section-title">Simple, affordable plans that grow with you</h2>
+      <p class="section-subtitle">Start completely free. Upgrade only when your business needs scale.</p>
+    </div>
+
+    <div class="pricing-cards">
+      <!-- Free Plan -->
+      <div class="pricing-card">
+        <div class="pricing-plan-name">Free Starter</div>
+        <div class="pricing-desc">Perfect for solo freelancers &amp; new service providers starting out.</div>
+        <div class="pricing-price">$0 <span>/ forever</span></div>
+        <ul class="pricing-features">
+          <li><span class="check-icon">✓</span> Up to 50 active customers</li>
+          <li><span class="check-icon">✓</span> Basic follow-up queue</li>
+          <li><span class="check-icon">✓</span> Core dashboard metrics</li>
+          <li><span class="check-icon">✓</span> Appointment scheduling</li>
+          <li><span class="check-icon">✓</span> Mobile &amp; Desktop access</li>
+        </ul>
+        <a href="signup.html" class="btn btn-secondary btn-block">Get Started Free</a>
+      </div>
+
+      <!-- Pro Plan -->
+      <div class="pricing-card popular">
+        <div class="popular-tag">Most Popular</div>
+        <div class="pricing-plan-name">Business Pro</div>
+        <div class="pricing-desc">Everything needed for growing teams and busy local shops.</div>
+        <div class="pricing-price">$19 <span>/ month</span></div>
+        <ul class="pricing-features">
+          <li><span class="check-icon">✓</span> <strong>Unlimited</strong> customers &amp; leads</li>
+          <li><span class="check-icon">✓</span> Overdue &amp; Today alert prioritization</li>
+          <li><span class="check-icon">✓</span> AI Follow-up Message Generator</li>
+          <li><span class="check-icon">✓</span> Visual Analytics &amp; Conversion Reports</li>
+          <li><span class="check-icon">✓</span> Unlimited CSV Data Exports</li>
+          <li><span class="check-icon">✓</span> WhatsApp &amp; Email 1-click integrations</li>
+          <li><span class="check-icon">✓</span> Priority Customer Support</li>
+        </ul>
+        <a href="signup.html" class="btn btn-primary btn-block">Start 14-Day Free Trial</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section" id="faq">
+    <div class="section-header">
+      <div class="section-tag">Got Questions?</div>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Do I need to install any complex software?</span>
+        <span>+</span>
+      </div>
+      <div class="faq-answer">
+        No! ClientFlow runs directly in any modern web browser on your phone, tablet, or PC. You can also save it to your home screen as a web app.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Can I use ClientFlow without configuring Firebase right away?</span>
+        <span>+</span>
+      </div>
+      <div class="faq-answer">
+        Yes! ClientFlow includes an instant offline/demo storage engine. You can test customer management, follow-ups, analytics, and CSV exports immediately, then connect Firebase whenever you want cloud persistence.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Can other businesses see my client details?</span>
+        <span>+</span>
+      </div>
+      <div class="faq-answer">
+        Never. All customer data is strictly isolated to your authenticated account ID using rock-solid Firestore Security Rules.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Can I export my data if I decide to cancel?</span>
+        <span>+</span>
+      </div>
+      <div class="faq-answer">
+        Absolutely. You can export your full client list and history to standard CSV at any time with one click.
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="landing-footer">
+    <div style="margin-bottom: 12px; font-weight: 700; color: var(--text-main);">
+      ClientFlow — Built for Small Businesses &amp; Local Service Providers
+    </div>
+    <p>&copy; 2026 ClientFlow Technologies. All rights reserved. Self-hostable, secure, and ready to deploy.</p>
+  </footer>
+
+  <!-- Calculator Script & FAQ accordion -->
+  <script>
+    // Calculator logic
+    const inq = document.getElementById("calcInquiries");
+    const price = document.getElementById("calcPrice");
+    const drop = document.getElementById("calcDrop");
+    const inqVal = document.getElementById("calcInquiriesVal");
+    const priceVal = document.getElementById("calcPriceVal");
+    const dropVal = document.getElementById("calcDropVal");
+    const totalEl = document.getElementById("calcLostTotal");
+
+    function updateCalc() {
+      const nInq = parseInt(inq.value, 10);
+      const nPrice = parseInt(price.value, 10);
+      const nDrop = parseInt(drop.value, 10);
+
+      inqVal.textContent = `${nInq} leads`;
+      priceVal.textContent = `$${nPrice}`;
+      dropVal.textContent = `${nDrop}%`;
+
+      const lostLeads = nInq * (nDrop / 100);
+      const lostRevenue = Math.round(lostLeads * nPrice);
+      totalEl.textContent = `$${lostRevenue.toLocaleString()}`;
+    }
+
+    inq.addEventListener("input", updateCalc);
+    price.addEventListener("input", updateCalc);
+    drop.addEventListener("input", updateCalc);
+    updateCalc();
+
+    // FAQ Accordion
+    document.querySelectorAll(".faq-item").forEach(item => {
+      item.addEventListener("click", () => {
+        item.classList.toggle("active");
+        const span = item.querySelector(".faq-question span:last-child");
+        if (span) span.textContent = item.classList.contains("active") ? "−" : "+";
+      });
+    });
+  </script>
+</body>
+</html>

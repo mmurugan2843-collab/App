@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Start Free - ClientFlow</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <!-- Firebase Compatibility SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="auth.js"></script>
+</head>
+<body>
+
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-header">
+        <a href="index.html" class="brand-icon" style="text-decoration: none;">CF</a>
+        <h1 class="auth-title">Create your account</h1>
+        <p class="auth-subtitle">Start turning more leads into paying customers today.</p>
+      </div>
+
+      <form id="signupForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="signupName">Your Name</label>
+            <input type="text" id="signupName" class="form-input" placeholder="Sarah Jenkins" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signupBusiness">Business Name</label>
+            <input type="text" id="signupBusiness" class="form-input" placeholder="Jenkins Salon &amp; Spa" required autocomplete="organization">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="signupEmail">Email Address</label>
+          <input type="email" id="signupEmail" class="form-input" placeholder="sarah@business.com" required autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="signupPassword">Password (6+ characters)</label>
+          <input type="password" id="signupPassword" class="form-input" placeholder="••••••••" required minlength="6" autocomplete="new-password">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg" id="signupSubmitBtn">
+          Create Free Account
+        </button>
+      </form>
+
+      <div class="auth-divider">
+        <span>OR</span>
+      </div>
+
+      <button type="button" class="btn btn-secondary btn-block" id="googleSignUpBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" style="margin-right: 6px;">
+          <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.15z"/>
+          <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.15C3.25 21.36 7.33 24 12 24z"/>
+          <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.26C.46 8.16 0 9.94 0 12s.46 3.84 1.26 5.42l4.02-3.15z"/>
+          <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.25 2.64 1.26 6.58l4.02 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+        </svg>
+        Sign Up with Google
+      </button>
+
+      <div class="auth-footer">
+        Already have an account? <a href="login.html">Sign in here</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Route guard: if already logged in, redirect to dashboard
+    ClientFlowAuth.protectRoute(false);
+
+    const form = document.getElementById("signupForm");
+    const submitBtn = document.getElementById("signupSubmitBtn");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("signupName").value.trim();
+      const business = document.getElementById("signupBusiness").value.trim();
+      const email = document.getElementById("signupEmail").value.trim();
+      const pass = document.getElementById("signupPassword").value;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Creating Account...";
+
+      try {
+        await ClientFlowAuth.signUp(email, pass, name, business);
+        window.location.href = "dashboard.html";
+      } catch (err) {
+        alert(err.message || "Failed to create account. Please try again.");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Create Free Account";
+      }
+    });
+
+    // Google Sign Up
+    document.getElementById("googleSignUpBtn").addEventListener("click", async () => {
+      try {
+        await ClientFlowAuth.signInWithGoogle();
+        window.location.href = "dashboard.html";
+      } catch (err) {
+        alert(err.message || "Google Sign-In was cancelled or failed.");
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "ClientFlow",
+  "description": "ClientFlow - Simple customer management, appointment tracking, and follow-up dashboard for small businesses and local service providers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

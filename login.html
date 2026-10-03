@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In - ClientFlow</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <!-- Firebase Compatibility SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="auth.js"></script>
+</head>
+<body>
+
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-header">
+        <a href="index.html" class="brand-icon" style="text-decoration: none;">CF</a>
+        <h1 class="auth-title">Welcome back</h1>
+        <p class="auth-subtitle">Log in to manage your leads, clients, and follow-ups.</p>
+      </div>
+
+      <!-- Quick Demo Login Banner -->
+      <div class="demo-banner-box">
+        <p><strong>Want to test without signing up?</strong></p>
+        <button type="button" class="btn btn-secondary btn-sm btn-block" id="quickDemoBtn" style="border-color: #06b6d4; color: #38bdf8;">
+          ⚡ Launch Interactive Demo Dashboard
+        </button>
+      </div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label class="form-label" for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" class="form-input" placeholder="you@business.com" required autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <label class="form-label" for="loginPassword" style="margin-bottom: 0;">Password</label>
+            <a href="#" id="forgotPasswordLink" style="font-size: 12px;">Forgot password?</a>
+          </div>
+          <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg" id="loginSubmitBtn">
+          Sign In
+        </button>
+      </form>
+
+      <div class="auth-divider">
+        <span>OR</span>
+      </div>
+
+      <button type="button" class="btn btn-secondary btn-block" id="googleSignInBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" style="margin-right: 6px;">
+          <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.15z"/>
+          <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.15C3.25 21.36 7.33 24 12 24z"/>
+          <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.26C.46 8.16 0 9.94 0 12s.46 3.84 1.26 5.42l4.02-3.15z"/>
+          <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.25 2.64 1.26 6.58l4.02 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+        </svg>
+        Continue with Google
+      </button>
+
+      <div class="auth-footer">
+        Don't have an account? <a href="signup.html">Create one for free</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div class="modal-overlay" id="forgotModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Reset Your Password</h3>
+        <button class="modal-close" onclick="document.getElementById('forgotModal').classList.remove('active')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">
+          Enter your registered email address and we'll send you instructions to reset your password.
+        </p>
+        <div class="form-group">
+          <label class="form-label" for="resetEmail">Email Address</label>
+          <input type="email" id="resetEmail" class="form-input" placeholder="you@business.com">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="document.getElementById('forgotModal').classList.remove('active')">Cancel</button>
+        <button class="btn btn-primary btn-sm" id="sendResetBtn">Send Reset Link</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Route guard: if already logged in, redirect to dashboard
+    ClientFlowAuth.protectRoute(false);
+
+    // Auto-login demo if URL has ?demo=true
+    if (new URLSearchParams(window.location.search).get("demo") === "true") {
+      ClientFlowAuth.loginAsDemo();
+      window.location.href = "dashboard.html";
+    }
+
+    // 1-Click Demo
+    document.getElementById("quickDemoBtn").addEventListener("click", () => {
+      ClientFlowAuth.loginAsDemo();
+      window.location.href = "dashboard.html";
+    });
+
+    // Form submission
+    const form = document.getElementById("loginForm");
+    const submitBtn = document.getElementById("loginSubmitBtn");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value.trim();
+      const pass = document.getElementById("loginPassword").value;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Signing In...";
+
+      try {
+        await ClientFlowAuth.signIn(email, pass);
+        window.location.href = "dashboard.html";
+      } catch (err) {
+        alert(err.message || "Failed to sign in. Please verify your email and password.");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Sign In";
+      }
+    });
+
+    // Google Sign-In
+    document.getElementById("googleSignInBtn").addEventListener("click", async () => {
+      try {
+        await ClientFlowAuth.signInWithGoogle();
+        window.location.href = "dashboard.html";
+      } catch (err) {
+        alert(err.message || "Google Sign-In was cancelled or failed.");
+      }
+    });
+
+    // Forgot password modal
+    document.getElementById("forgotPasswordLink").addEventListener("click", (e) => {
+      e.preventDefault();
+      document.getElementById("forgotModal").classList.add("active");
+    });
+
+    document.getElementById("sendResetBtn").addEventListener("click", async () => {
+      const email = document.getElementById("resetEmail").value.trim();
+      if (!email) {
+        alert("Please enter your email address.");
+        return;
+      }
+      try {
+        await ClientFlowAuth.sendPasswordReset(email);
+        alert("Password reset instructions sent to " + email);
+        document.getElementById("forgotModal").classList.remove("active");
+      } catch (err) {
+        alert(err.message || "Could not send reset email.");
+      }
+    });
+  </script>
+</body>
+</html>
